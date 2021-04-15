@@ -1,0 +1,121 @@
+#! /home/voccer/python
+
+import datetime
+from lunarcalendar import Converter, Solar, Lunar
+import requests
+import subprocess
+import shutil
+import os
+import time
+import webbrowser as wb
+
+DIR_PATH_TEMPLATES = '/home/voccer/execute/notify_birthday/templates'
+DIR_PATH = '/home/voccer/execute/notify_birthday'
+URL_BIRDAY = 'https://docs.google.com/document/u/0/export?format=txt&id=1b2aQMfZvhLhqs5bnGrdNZUnOSmCGsuNZeSH8Qk6ndrg&token=AC4w5VjlljBzAvNU8CtCSnvvFwe52p-2-w%3A1589941528767&ouid=102939292131381354747&includes_info_params=true&inspectorResult=%7B%22pc%22%3A1%2C%22lplc%22%3A20%7D'
+
+## remove file exist
+def remove_exist_file():
+    try:
+        os.remove(os.path.join(DIR_PATH_TEMPLATES, 'index.html'))
+        os.remove(os.path.join(DIR_PATH, 'result'))
+    except:
+        pass
+
+def set_info():
+    if not os.path.exists(os.path.join(DIR_PATH,'birthday')):
+        download_birthday_file()
+    with open(os.path.join(DIR_PATH,'birthday'), 'r') as f:
+        p = f.read()
+        p = p.split('\n')
+    
+    if not p:
+        return
+
+    solar_today = datetime.date.today()
+
+    lunar_today = Converter.Solar2Lunar(Solar(solar_today.year, solar_today.month, solar_today.day))
+
+    info = []
+    for i in p:
+        if i == '':
+            continue
+        name_birthday = i.split(':')[0]
+        solar_birthday = i.split(':')[1].replace(' ', '')
+        solar_day = int(solar_birthday.split('/')[0]) 
+        solar_month = int(solar_birthday.split('/')[1])
+        solar_year = int(solar_birthday.split('/')[2])
+
+        # exception unknown
+        if solar_day == 0:
+            solar_day = 1
+        if solar_month == 0:
+            solar_month = 1    
+        if solar_year == 0:
+            solar_year = 1900
+        
+        try:
+            lunar_birthday = Converter.Solar2Lunar(Solar(solar_year, solar_month, solar_day))
+        except Exception as e:
+            print(e)
+            print(solar_year, solar_month, solar_day)
+
+        if solar_day == solar_today.day and solar_month == solar_today.month:
+            age = int(solar_today.year - solar_year)
+            info.append([age, name_birthday, 'solar'])
+        if lunar_birthday.day == lunar_today.day and lunar_birthday.month == lunar_today.month:
+            age = int(lunar_today.year - lunar_birthday.year)
+            info.append([age, name_birthday, 'lunar'])
+
+    return info
+    
+
+
+def print_result(info):
+    if len(info) > 0:
+        with open(os.path.join(DIR_PATH,'result'), 'w') as f:
+            f.write('has:\n')
+            for p in info:
+                f.write(p[1] + '\n')
+        with open(os.path.join(DIR_PATH_TEMPLATES, 'index.html'), 'w') as index:
+            with open(os.path.join(DIR_PATH_TEMPLATES, 'header.html'), 'r') as header:
+                for l in header:
+                    index.write(l)
+
+            for p in info:
+                index.write('Today is {} birthday, {} age, {}<br>'.format(p[1].replace('\ufeff', ''), p[0], p[2]))
+
+            with open(os.path.join(DIR_PATH_TEMPLATES, 'footer.html'), 'r') as footer:
+                for l in footer:
+                    index.write(l)
+
+       #subprocess.run('node ' + os.path.join(DIR_PATH, 'script.js'), shell=True)
+        wb.get('google-chrome').open(os.path.join(DIR_PATH_TEMPLATES, 'index.html'), new=0, autoraise=True)
+    else:
+        with open(os.path.join(DIR_PATH, 'result'), 'w') as f:
+            f.write('no thing')
+
+
+
+def download_birthday_file():
+    try:
+        r = requests.get(URL_BIRDAY)
+        b = r.text
+        with open(os.path.join(DIR_PATH,'birthday'), 'w') as f:
+            f.write(b)
+    except Exception as e:
+        with open(os.path.join(DIR_PATH, 'log'), 'w+') as f:
+            f.write(e + '\n')
+
+if __name__ == "__main__":
+    remove_exist_file()
+    print('remove file successed')
+    info = set_info()
+    if info:
+        print('find info')
+        print_result(info)
+    else:
+        print("don't find info")
+    
+    time.sleep(500)
+    download_birthday_file()
+

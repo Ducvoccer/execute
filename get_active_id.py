@@ -1,0 +1,40 @@
+#! /home/voccer/python
+import subprocess as sp
+
+user_process = ['chrome', 'vim', 'thunder', 'brave', 'opera'\
+,'plank', 'AppRun', 'kdocker', 'AppImage', 'top', 'crow'\
+,'anydesk', 'gimp', 'vlc', 'start','pulseaudio', 'vmware'\
+,'cinnamon-set','python', 'gnome-system-mo', 'ibus', 'nemo'\
+,'code', 'bash'
+]
+
+def get_active_id_p():
+    list_id = []
+    for up in user_process:
+        ids_pr = sp.getoutput('pgrep {}'.format(up)).split('\n')
+        list_id.extend(ids_pr)
+    while True:
+        try:
+            list_id.remove('')
+        except:
+            break
+    return list_id
+
+def get_active_id():
+    list_process = sp.getoutput('top -b -n 1').split('\n')
+    list_id = []
+    for p in list_process:
+        if 'voccer' not in p:
+            continue
+        else:
+            name_proc, id_proc = p.split(' ')[-1], p.split(' ')[3]
+            for up in user_process:
+                if up in name_proc:
+                    list_id.append(id_proc)
+                    
+    while True:
+        try:
+            list_id.remove('')
+        except:
+            break
+    return list_id

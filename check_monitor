@@ -1,0 +1,7 @@
+#! /bin/bash
+
+if [[ $(xrandr --listmonitors) == *"1920/527x1080/296+0+0"* ]]
+then
+	xrandr --output DP-1 
+	xrandr --output eDP-1 --off
+fi

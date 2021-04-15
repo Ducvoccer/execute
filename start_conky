@@ -1,0 +1,3 @@
+#! /bin/bash
+
+/home/voccer/conky/conky.AppImage -c /home/voccer/conky/conky.conf

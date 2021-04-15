@@ -1,0 +1,19 @@
+#! /home/voccer/python
+
+import subprocess as sp
+from get_active_id import get_active_id
+import time
+
+def kill_process(list_id):
+    for i in list_id:
+        time.sleep(0.2)
+        sp.getoutput('kill {}'.format(i))
+def shutdown():
+    time.sleep(1)
+    sp.getoutput('/usr/sbin/shutdown -P now')
+if __name__ == '__main__':
+    list_id = get_active_id()
+    kill_process(list_id)
+    shutdown()
+                    
+

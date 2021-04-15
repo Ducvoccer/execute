@@ -1,0 +1,44 @@
+#! /home/voccer/python
+
+import subprocess as sp 
+import sys
+
+
+list_sinknames = [
+ 'alsa_output.pci-0000_00_1f.3.hdmi-stereo-extra1'\
+,'alsa_output.pci-0000_00_1f.3.analog-stereo'\
+,'alsa_output.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.analog-stereo'\
+,'bluez_sink.F4_0E_07_61_06_2D.a2dp_sink'\
+,'alsa_output.pci-0000_00_1f.3.analog-stereo'\
+]
+list_divices = ['hdmi', 'headphone', 'adapter', 'headphone_wireless', 'speaker']
+list_ports = [\
+'analog-output-speaker'\
+,'analog-output-headphones'\
+,'analog-output-speaker'\
+,'headset-output'\
+,'analog-output-speaker'\
+]
+# list_sourcenames = [
+# 'alsa_output.pci-0000_00_1f.3.analog-stereo.monitor'\
+# ,'alsa_input.pci-0000_00_1f.3.analog-stereo'\
+# ,'alsa_output.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.analog-stereo.monitor'\
+# ,'alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback'\
+# ]
+# sourcename = list_sourcenames[1]
+
+if len(sys.argv) != 2:
+    print('Agrument is not correct')
+else:
+    device = sys.argv[1]
+    if device not in list_divices:
+        print('device is not support')
+    else:
+        index = list_divices.index(device)
+        sinkname = list_sinknames[index]
+        port = list_ports[index]
+        sp.getoutput('pacmd set-sink-port {} {}'.format(sinkname, port))
+        sp.getoutput('pacmd set-default-sink {}'.format(sinkname))
+# sp.getoutput('pacmd set-default-source {}'.format(sourcename))
+
+# pacmd set-sink-volume index volume

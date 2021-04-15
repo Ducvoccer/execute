@@ -1,0 +1,3 @@
+#! /bin/bash
+
+kdocker -t -p 0 -d 15 /home/voccer/thunderbird/thunderbird 

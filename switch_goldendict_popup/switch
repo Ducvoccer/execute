@@ -1,0 +1,21 @@
+#! /home/voccer/python
+
+import pyautogui as pg
+x_current, y_current = pg.position()
+x = ''
+
+try:
+    x, y = pg.locateCenterOnScreen('/usr/games/switch_goldendict_popup/goldendict.png', grayscale=True, region=(1450, 0, 300, 25), confidence=0.8)
+except:
+    pass
+if not x:
+    try:
+        x, y = pg.locateCenterOnScreen('/usr/games/switch_goldendict_popup/goldendict2.png', grayscale=True, region=(1450, 0, 300, 25), confidence=0.8)
+    except:
+        pass
+print(x)
+print(y)
+pg.click(x=x, y=y, button='right')
+pg.press('down', presses=2)
+pg.press('enter')
+pg.moveTo(x_current, y_current, 0)
