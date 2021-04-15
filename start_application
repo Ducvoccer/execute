@@ -1,11 +1,12 @@
 #! /bin/bash
 /home/voccer/execute/start_thunderbird &
-/home/voccer/execute/check_monitor &
+/home/voccer/execute/check_monitor 
 /home/voccer/execute/start_conky &
 /usr/bin/plank &
 
 /home/voccer/execute/notify_birthday/execute &
 /home/voccer/execute/set_english_keyboard &
+/home/voccer/execute/select_mic &
 #10
 sleep 10
 /usr/bin/crow &
