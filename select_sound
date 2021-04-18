@@ -38,7 +38,11 @@ else:
         sinkname = list_sinknames[index]
         port = list_ports[index]
         sp.getoutput('pacmd set-sink-port {} {}'.format(sinkname, port))
-        sp.getoutput('pacmd set-default-sink {}'.format(sinkname))
-# sp.getoutput('pacmd set-default-source {}'.format(sourcename))
+        o = sp.getoutput('pacmd set-default-sink {}'.format(sinkname))
+#         print(o)
+#         if o:
+#             print('here')
+#             sp.getoutput('notify-send Select_sound "{} not exist"'.format(device))
+# # sp.getoutput('pacmd set-default-source {}'.format(sourcename))
 
 # pacmd set-sink-volume index volume

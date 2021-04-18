@@ -11,6 +11,5 @@
 sleep 10
 /usr/bin/crow &
 sleep 100 # 110 in real
-/home/voccer/execute/update auto
-
+/home/voccer/execute/update auto 
 

@@ -21,16 +21,14 @@ def get_active_id_p():
     return list_id
 
 def get_active_id():
-    list_process = sp.getoutput('top -b -n 1').split('\n')
+    list_process = sp.getoutput('top -b -n 1 -u voccer -w 100').split('\n')
     list_id = []
-    for p in list_process:
-        if 'voccer' not in p:
-            continue
-        else:
-            name_proc, id_proc = p.split(' ')[-1], p.split(' ')[3]
-            for up in user_process:
-                if up in name_proc:
-                    list_id.append(id_proc)
+    for p in list_process[7:]:
+        p = p.strip()
+        name_proc, id_proc = p.split(' ')[-1], p.split(' ')[0]
+        for up in user_process:
+            if up in name_proc:
+                list_id.append(id_proc)
                     
     while True:
         try:

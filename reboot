@@ -7,13 +7,15 @@ import time
 
 def kill_process(list_id):
     for i in tqdm(list_id):
+        time.sleep(0.01)
         sp.getoutput('kill {}'.format(i))
 def reboot():
     print('Starting reboot ...')
-    time.sleep(2)
+    time.sleep(0.5)
     sp.getoutput('/usr/sbin/reboot')
 if __name__ == '__main__':
     list_id = get_active_id()
+    # print(list_id)
     kill_process(list_id)
     reboot()
                     

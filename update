@@ -6,10 +6,10 @@ import sys
 import os
 
 def check_log():
-    if not os.path.exists('./update_log'):
+    if not os.path.exists('/home/voccer/execute/update_log'):
         return True
     try:
-        with open('update_log') as f:
+        with open('/home/voccer/execute/update_log') as f:
             log = f.read().split('\n')
     
         last_date = log[-2].split('-')[-1][:2]
@@ -28,11 +28,12 @@ def update():
     sp.run('sudo apt autoremove --purge', shell=True)
 
 def write_log():
-    with open('update_log', 'a+') as f:
+    with open('/home/voccer/execute/update_log', 'a+') as f:
         f.write(str(datetime.datetime.now()) + '\n')
 
 def remove_sound():
     sp.getoutput('rm -r ~/.config/puluse')
+    
 if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == 'auto':
         if len(sys.argv) > 2 and sys.argv[2] == 'force':

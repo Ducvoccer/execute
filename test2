@@ -1,5 +1,5 @@
 #! /home/voccer/python
 import time
 for i in range(10,20):
-    time.sleep(2)
+    time.sleep(1)
     print(i)
