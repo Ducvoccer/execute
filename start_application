@@ -1,15 +1,17 @@
 #! /bin/bash
+
 /home/voccer/execute/start_thunderbird &
-/home/voccer/execute/check_monitor 
+/home/voccer/execute/check_monitor &
+
+/home/voccer/execute/notify_birthday/execute &
 /home/voccer/execute/start_conky &
 /usr/bin/plank &
 
-/home/voccer/execute/notify_birthday/execute &
+/home/voccer/execute/turnoff_touchpad_keyboard &
+
+sleep 5
 /home/voccer/execute/set_english_keyboard &
 /home/voccer/execute/select_mic &
-#10
-sleep 10
 /usr/bin/crow &
-sleep 100 # 110 in real
+sleep 100 
 /home/voccer/execute/update auto 
-

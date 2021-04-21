@@ -1,0 +1,23 @@
+#! /home/voccer/python
+
+import subprocess as sp 
+
+list_input = sp.getoutput('xinput --list').split('\n')
+
+has_mouse = False
+has_keyboard = False
+
+for i in list_input:
+    if 'G102' in i:
+        has_mouse = True
+    if 'DLL07A0:01 044E:120B' in i:
+        id_touchpad = i.split('=')[1][:2].strip()
+    if 'Usb Gaming' in i:
+        has_keyboard = True
+    if 'AT Translated' in i:
+        id_keyboard = i.split('=')[1][:2].strip()
+
+if has_mouse:
+    sp.getoutput("xinput set-prop {} 'Device Enabled' 0".format(id_touchpad))
+if has_keyboard:
+    sp.getoutput("xinput set-prop {} 'Device Enabled' 0".format(id_keyboard))

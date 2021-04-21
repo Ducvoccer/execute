@@ -2,8 +2,7 @@
 
 if [[ $(xrandr --listmonitors) == *"1920/527x1080/296+0+0"* ]]
 then
-	xrandr --output DP-1 
+	#xrandr --output DP-1 
 	xrandr --output eDP-1 --off
 fi
 
-sh -c 'if [ "x$XDG_SESSION_TYPE" = "xwayland" ] ; then exec env IM_CONFIG_CHECK_ENV=1 im-launch true; fi'

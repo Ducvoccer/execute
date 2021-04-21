@@ -15,7 +15,7 @@ def check_log():
         last_date = log[-2].split('-')[-1][:2]
         if int(last_date) > int(datetime.datetime.now().day):
             return True
-        elif int(datetime.datetime.now().day) - int(last_date) > 3:
+        elif int(datetime.datetime.now().day) - int(last_date) >= 3:
             return True
     except Exception as e:
         print(e)
@@ -26,6 +26,7 @@ def update():
     sp.run('sudo apt update', shell=True)
     sp.run('sudo apt upgrade -y', shell=True)
     sp.run('sudo apt autoremove --purge', shell=True)
+    sp.run('sudo apt autoclean', shell=True)
 
 def write_log():
     with open('/home/voccer/execute/update_log', 'a+') as f:
@@ -42,7 +43,7 @@ if __name__ == '__main__':
             if check_log():
                 update()
                 write_log()
-                remove_sound()
+                #remove_sound()
     else:
         update()
 
