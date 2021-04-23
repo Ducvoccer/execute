@@ -4,6 +4,7 @@ import subprocess as sp
 import datetime
 import sys
 import os
+import time
 
 def check_log():
     if not os.path.exists('/home/voccer/execute/update_log'):
@@ -15,7 +16,7 @@ def check_log():
         last_date = log[-2].split('-')[-1][:2]
         if int(last_date) > int(datetime.datetime.now().day):
             return True
-        elif int(datetime.datetime.now().day) - int(last_date) >= 3:
+        elif int(datetime.datetime.now().day) - int(last_date) >= 2:
             return True
     except Exception as e:
         print(e)
@@ -25,25 +26,19 @@ def check_log():
 def update():
     sp.run('sudo apt update', shell=True)
     sp.run('sudo apt upgrade -y', shell=True)
-    sp.run('sudo apt autoremove --purge', shell=True)
+    sp.run('sudo apt autoremove -y --purge', shell=True)
     sp.run('sudo apt autoclean', shell=True)
 
 def write_log():
     with open('/home/voccer/execute/update_log', 'a+') as f:
         f.write(str(datetime.datetime.now()) + '\n')
 
-def remove_sound():
-    sp.getoutput('rm -r ~/.config/puluse')
-    
 if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == 'auto':
-        if len(sys.argv) > 2 and sys.argv[2] == 'force':
+        if check_log():
+            time.sleep(500)
             update()
-        else:
-            if check_log():
-                update()
-                write_log()
-                #remove_sound()
+            write_log()
     else:
         update()
 

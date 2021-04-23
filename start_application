@@ -13,5 +13,4 @@ sleep 5
 /home/voccer/execute/set_english_keyboard &
 /home/voccer/execute/select_mic &
 /usr/bin/crow &
-sleep 100 
-/home/voccer/execute/update auto 
+/home/voccer/execute/update auto &
