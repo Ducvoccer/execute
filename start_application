@@ -1,16 +1,21 @@
 #! /bin/bash
 
-/home/voccer/execute/start_thunderbird &
 /home/voccer/execute/check_monitor &
-
+/home/voccer/execute/start_thunderbird &
 /home/voccer/execute/notify_birthday/execute &
+sleep 3
 /home/voccer/execute/start_conky &
 /usr/bin/plank &
-
-/home/voccer/execute/turnoff_touchpad_keyboard &
-
-sleep 5
+sleep 3
+/usr/bin/crow &
+/usr/bin/megasync &
+sleep 10
 /home/voccer/execute/set_english_keyboard &
 /home/voccer/execute/select_mic &
-/usr/bin/crow &
 /home/voccer/execute/update auto &
+/home/voccer/execute/turnoff_webcam &
+/home/voccer/execute/turnoff_touchpad_keyboard &
+sleep 10
+/home/voccer/execute/mount_google_drive &
+sleep 10
+/home/vocer/execute/backup_home &

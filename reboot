@@ -7,16 +7,20 @@ import time
 
 def kill_process(list_id):
     for i in tqdm(list_id):
-        time.sleep(0.01)
+        time.sleep(0.02)
         sp.getoutput('kill {}'.format(i))
 def reboot():
-    print('Starting reboot ...')
-    time.sleep(0.5)
+    time.sleep(0.1)
     sp.getoutput('/usr/sbin/reboot')
+def umount():
+    sp.getoutput('sudo /usr/bin/umount /media/voccer/*')
 if __name__ == '__main__':
     list_id = get_active_id()
     # print(list_id)
+    print("Kill Process")
     kill_process(list_id)
+    print("Umount")
+    umount()
     reboot()
                     
 

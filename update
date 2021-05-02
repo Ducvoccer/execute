@@ -12,11 +12,11 @@ def check_log():
     try:
         with open('/home/voccer/execute/update_log') as f:
             log = f.read().split('\n')
-    
+        
+       #print(log)
         last_date = log[-2].split('-')[-1][:2]
-        if int(last_date) > int(datetime.datetime.now().day):
-            return True
-        elif int(datetime.datetime.now().day) - int(last_date) >= 2:
+        
+        if int(datetime.datetime.now().day) != int(last_date):
             return True
     except Exception as e:
         print(e)

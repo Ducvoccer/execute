@@ -4,8 +4,8 @@ import subprocess as sp
 user_process = ['chrome', 'vim', 'thunder', 'brave', 'opera'\
 ,'plank', 'AppRun', 'kdocker', 'AppImage', 'top', 'crow'\
 ,'anydesk', 'gimp', 'vlc', 'start','pulseaudio', 'vmware'\
-,'cinnamon-set','python', 'gnome-system-mo', 'ibus', 'nemo'\
-,'code', 'bash'
+,'cinnamon-set','python', 'gnome-system-mo', 'nemo'\
+,'code', 'bash', 'wireshark', 'rclone', 'mega'\
 ]
 
 def get_active_id_p():

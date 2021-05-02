@@ -21,3 +21,4 @@ if has_mouse:
     sp.getoutput("xinput set-prop {} 'Device Enabled' 0".format(id_touchpad))
 if has_keyboard:
     sp.getoutput("xinput set-prop {} 'Device Enabled' 0".format(id_keyboard))
+    

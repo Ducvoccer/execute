@@ -1,0 +1,7 @@
+#! /bin/bash
+
+sudo modprobe -r uvcvideo
+
+#turnon again
+
+#sudo modprobe -i uvcvideo
