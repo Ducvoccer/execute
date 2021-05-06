@@ -8,18 +8,6 @@ user_process = ['chrome', 'vim', 'thunder', 'brave', 'opera'\
 ,'code', 'bash', 'wireshark', 'rclone', 'mega'\
 ]
 
-def get_active_id_p():
-    list_id = []
-    for up in user_process:
-        ids_pr = sp.getoutput('pgrep {}'.format(up)).split('\n')
-        list_id.extend(ids_pr)
-    while True:
-        try:
-            list_id.remove('')
-        except:
-            break
-    return list_id
-
 def get_active_id():
     list_process = sp.getoutput('top -b -n 1 -u voccer -w 100').split('\n')
     list_id = []

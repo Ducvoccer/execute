@@ -11,9 +11,12 @@ def kill_process(list_id):
 def shutdown():
     time.sleep(1)
     sp.getoutput('/usr/sbin/shutdown -P now')
+def umount():
+    sp.getoutput('/home/voccer/execute/umount_all')
 if __name__ == '__main__':
     list_id = get_active_id()
     kill_process(list_id)
+    umount()
     shutdown()
                     
 
