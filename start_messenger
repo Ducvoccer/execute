@@ -1,0 +1,13 @@
+#! /usr/bin/python
+
+import subprocess as sp
+import time
+
+sp.run('brave-browser --app-id=ejpgckkfihilfdjfafdcjdilkamkhhfh &', shell=True)
+icon_path = "/home/voccer/.local/share/icons/hicolor/256x256/apps/brave-ejpgckkfihilfdjfafdcjdilkamkhhfh-Default.png"
+icon_notify = "/home/voccer/.local/share/icons/hicolor/256x256/apps/brave-ejpgckkfihilfdjfafdcjdilkamkhhfh-notify.png"
+brave_process = sp.getoutput('top -b -n 1 -o PID | grep brave').split('\n')
+mes_process=brave_process[-2]
+pid = mes_process.strip().split(' ')[0]
+time.sleep(5)
+sp.run('kdocker -t -d 15 -p 0 -i {} -I {} -x {}'.format(icon_path, icon_notify, pid), shell=True)

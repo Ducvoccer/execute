@@ -1,24 +1,26 @@
-#! /home/voccer/python
+#! /usr/bin/python
 
 import subprocess as sp
 from get_active_id import get_active_id
 from tqdm import tqdm 
 import time
 
-def kill_process(list_id):
+def kill_process(list_id, zsh_id):
     for i in tqdm(list_id):
-        time.sleep(0.02)
+        time.sleep(0.01)
         sp.getoutput('kill {}'.format(i))
+    for i in zsh_id:
+        sp.getoutput('kill -9 {}'.format(i))
+
 def reboot():
     time.sleep(0.1)
     sp.getoutput('/usr/sbin/reboot')
 def umount():
     sp.getoutput('/home/voccer/execute/umount_all')
 if __name__ == '__main__':
-    list_id = get_active_id()
-    # print(list_id)
+    list_id, zsh_id = get_active_id()
     print("Kill Process")
-    kill_process(list_id)
+    kill_process(list_id, zsh_id)
     print("Umount")
     umount()
     print("reboot")

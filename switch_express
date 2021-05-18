@@ -1,0 +1,7 @@
+#! /bin/sh
+
+if [[ $(expressvpn status) == *"Not"* ]]; then
+	expressvpn connect
+else
+	expressvpn disconnect
+fi

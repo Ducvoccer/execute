@@ -1,5 +1,5 @@
 #! /bin/bash
 
-rclone mount --dir-cache-time 10h --vfs-read-chunk-size 32M --vfs-read-chunk-size-limit 2G --buffer-size 512M --vfs-cache-mode full 20161113: /media/voccer/student &
+rclone mount --dir-cache-time 10h --vfs-read-chunk-size 32M --vfs-read-chunk-size-limit 2G --buffer-size 512M --vfs-cache-mode full student: /media/voccer/student &
 
-rclone mount --dir-cache-time 10h --vfs-read-chunk-size 32M --vfs-read-chunk-size-limit 2G --buffer-size 512M --vfs-cache-mode full ntduc250798: /media/voccer/ntduc250798 &
+rclone mount --dir-cache-time 10h --vfs-read-chunk-size 32M --vfs-read-chunk-size-limit 2G --buffer-size 512M --vfs-cache-mode full ntduc: /media/voccer/ntduc &

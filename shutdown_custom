@@ -1,21 +1,24 @@
-#! /home/voccer/python
+#! /usr/bin/python
 
 import subprocess as sp
 from get_active_id import get_active_id
 import time
 
-def kill_process(list_id):
+def kill_process(list_id, zsh_id):
     for i in list_id:
         time.sleep(0.2)
         sp.getoutput('kill {}'.format(i))
+    for i in zsh_id:
+        sp.getoutput('kill -9 {}'.format(i))
+
 def shutdown():
     time.sleep(1)
     sp.getoutput('/usr/sbin/shutdown -P now')
 def umount():
     sp.getoutput('/home/voccer/execute/umount_all')
 if __name__ == '__main__':
-    list_id = get_active_id()
-    kill_process(list_id)
+    list_id, zsh_id = get_active_id()
+    kill_process(list_id, zsh_id)
     umount()
     shutdown()
                     

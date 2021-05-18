@@ -1,4 +1,4 @@
-#! /home/voccer/python
+#! /usr/bin/python
 
 import subprocess as sp 
 

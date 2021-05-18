@@ -1,3 +1,3 @@
-#! /bin/bash
+#! /bin/sh
 
-curl ipinfo.io/ip > /home/voccer/execute/conky/ip
+/usr/bin/curl ipinfo.io/ip > /home/voccer/execute/conky/ip

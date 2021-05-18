@@ -1,4 +1,4 @@
-#! /home/voccer/python
+#! /usr/bin/python
 
 import datetime
 from lunarcalendar import Converter, Solar, Lunar
