@@ -1,3 +1,32 @@
-/usr/bin/thunderbird
+#! /usr/bin/python
+import subprocess as sp
+import time
+def open_app():
+    sp.Popen(['/usr/bin/thunderbird'])
+def minimize():
+    t = 1
+    time.sleep(0.5)
+    while t < 30:
+        try:
+            w_list = [l.split() for l in sp.check_output(["wmctrl", "-lp"]).decode("utf-8").splitlines()] 
+            for w in w_list:
+                if "Thunderbird" == w[-1]:
+                    win_id = w[0]
+                    break
+            sp.Popen(["xdotool", "windowminimize", win_id])
+            break
+        except Exception as e:
+            pass
+        t += 1
+        time.sleep(0.5)
+    return win_id
+def dock(win_id):
+    icon_path = '/home/voccer/.local/share/icons/McMojave-circle-grey-dark/apps/scalable/internet-mail.svg'
+    icon_notify = '/home/voccer/.local/share/icons/McMojave-circle-grey-dark/apps/internet-mail.png'
+    sp.run('kdocker -t -q -i {} -I {} -w {}'.format(icon_path, icon_notify, win_id), shell=True)
 
-#kdocker -t -p 0 -d 15 /home/voccer/thunderbird/thunderbird 
+if __name__ == '__main__':
+    open_app()
+    win_id = minimize()
+    #time.sleep(1)
+    #dock(win_id)

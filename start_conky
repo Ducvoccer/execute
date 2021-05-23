@@ -1,2 +1,3 @@
 #! /bin/bash
+/home/voccer/execute/conky/gen_ip
 /home/voccer/execute/conky/conky.AppImage -c /home/voccer/execute/conky/conky.conf &

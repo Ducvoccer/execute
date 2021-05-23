@@ -1,13 +1,34 @@
 #! /usr/bin/python
-
 import subprocess as sp
 import time
+def open_app():
+    sp.Popen(['brave-browser', '--app-id=mjaeogbfhagmchlelohfdochcafjhnid'])
+def minimize():
+    t = 1
+    time.sleep(0.5)
+    while t < 30:
+        try:
+            w_list = [l.split() for l in sp.check_output(["wmctrl", "-lp"]).decode("utf-8").splitlines()] 
+            for w in w_list:
+                if "Messenger" == w[-1]:
+                    win_id = w[0]
+                    break
+            sp.Popen(["xdotool", "windowminimize", win_id])
+            break
+        except Exception as e:
+            pass
+        t += 1
+        time.sleep(0.5)
+    return win_id
+def dock(win_id):
+    icon_path = "/home/voccer/.local/share/icons/hicolor/256x256/apps/brave-mjaeogbfhagmchlelohfdochcafjhnid-Default.png"
+    icon_notify = "/home/voccer/.local/share/icons/hicolor/256x256/apps/brave-mjaeogbfhagmchlelohfdochcafjhnid-notify.png"
+    sp.run('kdocker -t -q -i {} -I {} -w {}'.format(icon_path, icon_notify, win_id), shell=True)
 
-sp.run('brave-browser --app-id=ejpgckkfihilfdjfafdcjdilkamkhhfh &', shell=True)
-icon_path = "/home/voccer/.local/share/icons/hicolor/256x256/apps/brave-ejpgckkfihilfdjfafdcjdilkamkhhfh-Default.png"
-icon_notify = "/home/voccer/.local/share/icons/hicolor/256x256/apps/brave-ejpgckkfihilfdjfafdcjdilkamkhhfh-notify.png"
-brave_process = sp.getoutput('top -b -n 1 -o PID | grep brave').split('\n')
-mes_process=brave_process[-2]
-pid = mes_process.strip().split(' ')[0]
-time.sleep(5)
-sp.run('kdocker -t -d 15 -p 0 -i {} -I {} -x {}'.format(icon_path, icon_notify, pid), shell=True)
+if __name__ == '__main__':
+    open_app()
+    win_id = minimize()
+    time.sleep(1)
+    dock(win_id)
+
+

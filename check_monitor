@@ -1,5 +1,4 @@
 #! /bin/bash
-csd-xrandr &
 
 sleep 0.5
 xrandr --output DP-1 --set "Broadcast RGB" "Full" 
