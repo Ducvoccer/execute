@@ -116,6 +116,6 @@ if __name__ == "__main__":
     else:
         print("don't find info")
     
-    time.sleep(500)
+    time.sleep(300)
     download_birthday_file()
 

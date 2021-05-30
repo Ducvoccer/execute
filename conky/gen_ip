@@ -1,3 +1,13 @@
-#! /bin/sh
+#! /bin/bash
+
+while true
+do
+	if [ $("/home/voccer/execute/check_internet") == 1 ]
+	then 
+		break
+	else
+		sleep 5
+	fi
+done
 
 /usr/bin/curl ipinfo.io/ip > /home/voccer/execute/conky/ip

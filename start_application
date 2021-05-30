@@ -5,14 +5,14 @@
 #/home/voccer/execute/switch_autohide_panel &
 /home/voccer/execute/notify_birthday/execute &
 sleep 3
-/home/voccer/execute/start_conky &
+/home/voccer/execute/conky/start_conky &
 /usr/bin/plank &
 #/usr/bin/megasync &
 sleep 5
 /usr/bin/crow &
 /home/voccer/execute/set_english_keyboard &
 /home/voccer/execute/select_mic &
-/home/voccer/execute/turnoff_webcam &
+#/home/voccer/execute/turnoff_webcam &
 /home/voccer/execute/turnoff_touchpad_keyboard &
 sleep 20
 /home/voccer/execute/mount_google_drive &

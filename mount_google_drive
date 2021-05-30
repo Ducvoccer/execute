@@ -1,5 +1,15 @@
 #! /bin/bash
 
+while true
+do
+	if [ $("/home/voccer/execute/check_internet") == 1 ]
+	then
+		break
+	else
+		sleep 5
+	fi 
+done
+
 rclone mount --dir-cache-time 10h --vfs-read-chunk-size 32M --vfs-read-chunk-size-limit 2G --buffer-size 512M --vfs-cache-mode full student: /media/voccer/student &
 
 rclone mount --dir-cache-time 10h --vfs-read-chunk-size 32M --vfs-read-chunk-size-limit 2G --buffer-size 512M --vfs-cache-mode full ntduc: /media/voccer/ntduc &

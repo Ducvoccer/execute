@@ -1,6 +1,5 @@
 #! /bin/bash
 
-sleep 0.5
 xrandr --output DP-1 --set "Broadcast RGB" "Full" 
 
 if [[ $(xrandr --listmonitors) == *"1920/527x1080/296+0+0"* ]]
