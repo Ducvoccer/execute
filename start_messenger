@@ -2,7 +2,7 @@
 import subprocess as sp
 import time
 def open_app():
-    sp.Popen(['brave-browser', '--app-id=mjaeogbfhagmchlelohfdochcafjhnid'])
+    sp.run('brave-browser --app-id=mjaeogbfhagmchlelohfdochcafjhnid', shell=True)
 def minimize():
     t = 1
     time.sleep(0.5)

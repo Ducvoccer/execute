@@ -11,11 +11,11 @@ sleep 3
 sleep 5
 /usr/bin/crow &
 /home/voccer/execute/set_english_keyboard &
-/home/voccer/execute/select_mic &
-#/home/voccer/execute/turnoff_webcam &
-/home/voccer/execute/turnoff_touchpad_keyboard &
+/home/voccer/execute/mute_mic &
+/home/voccer/execute/webcam/turnoff_webcam &
+/home/voccer/execute/internal_touchpad_keyboard/turnoff_all &
 sleep 20
-/home/voccer/execute/mount_google_drive &
-#/home/voccer/execute/backup_home &
+/home/voccer/execute/google_drive/mount_google_drive &
+/home/voccer/execute/google_drive/backup_home &
 sleep 100
 /home/voccer/execute/update &

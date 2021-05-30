@@ -1,0 +1,12 @@
+#! /usr/bin/python
+
+import subprocess as sp 
+
+list_input = sp.getoutput('xinput --list').split('\n')
+
+for i in list_input:
+    if 'DLL07A0:01 044E:120B' in i:
+        id_touchpad = i.split('=')[1][:2].strip()
+
+sp.run("xinput set-prop {} 'Device Enabled' 1".format(id_touchpad),shell=True)
+    
